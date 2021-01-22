@@ -20,7 +20,7 @@ public class AmazonConfig {
     @Bean
     public AmazonS3 s3()
     {
-        File keys = new File("C:\\GitRepo\rootkey.csv");
+        File keys = new File("C:\\GitRepo\\rootkey.csv");
         try
         {
             Scanner s = new Scanner(keys);
@@ -37,6 +37,7 @@ public class AmazonConfig {
         AWSCredentials cred = new BasicAWSCredentials("accessKey", "secretKey");
         return AmazonS3ClientBuilder
                 .standard()
+                .withRegion("eu-west-1")
                 .withCredentials(new AWSStaticCredentialsProvider((cred)))
                 .build();
     }
