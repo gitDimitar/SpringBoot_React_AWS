@@ -20,21 +20,25 @@ public class AmazonConfig {
     @Bean
     public AmazonS3 s3()
     {
+        String accessKey = "";
+        String secretKey = "";
         File keys = new File("C:\\GitRepo\\rootkey.csv");
         try
         {
             Scanner s = new Scanner(keys);
-            String accessKey = s.nextLine();
-            accessKey = accessKey.substring(accessKey.indexOf('='), accessKey.length()-1);
-            String secretKey = s.nextLine();
-            secretKey = secretKey.substring(secretKey.indexOf('='), secretKey.length()-1);
+            accessKey = s.nextLine();
+            accessKey = accessKey.substring(accessKey.indexOf('=')+1, accessKey.length());
+            System.out.println("Accesss key : " + accessKey);
+            secretKey = s.nextLine();
+            secretKey = secretKey.substring(secretKey.indexOf('=')+1, secretKey.length());
+            System.out.println("Secret key : " + secretKey);
         }
         catch (FileNotFoundException e)
         {
             e.printStackTrace();
         }
 
-        AWSCredentials cred = new BasicAWSCredentials("accessKey", "secretKey");
+        AWSCredentials cred = new BasicAWSCredentials(accessKey, secretKey);
         return AmazonS3ClientBuilder
                 .standard()
                 .withRegion("eu-west-1")

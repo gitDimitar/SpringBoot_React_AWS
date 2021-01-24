@@ -23,4 +23,14 @@ public class UserDataAccessService {
     {
         return fakeUserDataStore.getUsers();
     }
+
+    public User getUserById(int id)
+    {
+        return fakeUserDataStore.getUserById(id);
+    }
+
+    public void setUserImage(int id, String imageUrl)
+    {
+        fakeUserDataStore.setUserImage(id, imageUrl);
+    }
 }
